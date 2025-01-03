@@ -1,0 +1,387 @@
+/* ========================================
+   BASIC RESET & GLOBALS
+======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #333333;
+
+  /* Solid background color from your palette (#5E3AA2) */
+  background-color: #5E3AA2; 
+  /* Prevent horizontal scroll if flares move off screen (optional) */
+  overflow: hidden;
+}
+
+/* ========================================
+   PRELOADER
+======================================== */
+.preloader {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+
+.loading-container {
+  text-align: center;
+}
+
+.loader-name {
+  font-size: 1.5rem;
+  color: #5E3AA2;
+  margin-bottom: 1rem;
+}
+
+.loader-line {
+  width: 0%;
+  height: 4px;
+  background-color: #8358d3;
+  animation: loadLine 2.5s linear forwards; 
+}
+
+@keyframes loadLine {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Hide preloader on fade-out */
+.preloader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ========================================
+   FLARES BACKGROUND
+======================================== */
+.flare-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* behind content, but over body background color */
+  overflow: hidden;
+}
+
+.flare {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: floatFlare 10s ease-in-out infinite alternate;
+}
+
+/* Simple floating animation */
+@keyframes floatFlare {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(100px, 200px); }
+}
+
+.flare-1 {
+  top: 10%;
+  left: 5%;
+  /* Teal radial gradient fading out */
+  background: radial-gradient(circle, rgba(0,182,184,0.4) 0%, rgba(0,182,184,0) 80%);
+  animation-duration: 12s; 
+}
+
+.flare-2 {
+  top: 60%;
+  left: 80%;
+  /* White radial gradient fading out */
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 80%);
+  animation-duration: 15s;
+}
+
+.flare-3 {
+  top: 30%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%);
+  animation-duration: 20s;
+  filter: blur(80px);
+}
+.flare-4 {
+  top: 30%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(0, 140, 255, 0.2) 0%, rgba(243, 103, 103, 0) 80%);
+  animation-duration: 40s;
+  filter: blur(80px);
+}
+.flare-5 {
+  top: 30%;
+  left: 40%;
+  background: radial-gradient(circle, rgba(96, 60, 255, 0.2) 0%, rgba(255,255,255,0) 80%);
+  animation-duration: 25s;
+  filter: blur(80px);
+}
+
+/* ========================================
+   NAVBAR
+======================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;           
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 20px 50px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000; 
+}
+
+.logo-image {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.nav-right .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-right .nav-links li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-right .nav-links li a:hover {
+  color: #5E3AA2;
+}
+
+.nav-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 4px;
+}
+
+.nav-text {
+  font-size: 0.85rem;
+}
+
+/* ========================================
+   SECTION BASE
+======================================== */
+.section {
+  position: absolute;
+  top: 80px; /* below navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  padding: 3rem 2rem;
+  
+  /* Transparent to show purple + flares behind it */
+  background-color: transparent;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.section.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ========================================
+   HOME SECTION
+======================================== */
+.home-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Container for text & optional elements in home */
+.hero-content {
+  max-width: 600px;
+  color: #ffffff; /* white text over purple background */
+}
+
+/* Profile image styling */
+.profile-image {
+  display: block;
+  max-width: 200px;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 50%;
+  border: 2px solid #fff; /* optional white border */
+}
+
+/* Headings & button in hero */
+.hero-content h2 {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 span {
+  color: #00B6B8; /* teal accent */
+}
+
+.subtitle {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.cta-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #5E3AA2;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ========================================
+   PROJECTS, ABOUT, RESUME, CONTACT
+======================================== */
+.projects-section,
+.about-section,
+.resume-section,
+.contact-section {
+  background-color: transparent;
+  color: #fff; /* or #333, depending on preference */
+}
+
+.projects-section h2,
+.about-section h2,
+.resume-section h2,
+.contact-section h2 {
+  font-size: 2rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
+  background-color: #fff; /* ensuring text is visible on the card */
+  color: #333;
+}
+
+.project-card:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+
+.project-card h3 {
+  color: #5E3AA2;
+  margin-bottom: 0.5rem;
+}
+
+.social-media {
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+.footer-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+  color: #333;
+  text-align: center;
+  padding: 15px 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  z-index: 1000; /* above the .section */
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   FADE-IN-UP ANIMATION
+======================================== */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* ========================================
+   RESPONSIVE QUERIES
+======================================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+  .logo-image {
+    width: 80px;
+  }
+  .nav-right .nav-links {
+    gap: 10px;
+  }
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .nav-text {
+    font-size: 0.8rem;
+  }
+
+  .home-section {
+    padding-top: 4rem;
+  }
+  .hero-content {
+    max-width: 90%;
+  }
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GauravRozatkar - Resume</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="Styling.css" />
+</head>
+<body>
+
+  <!-- PRELOADER OVERLAY -->
+  <div class="preloader">
+    <div class="loading-container">
+      <h1 class="loader-name">Gaurav Rozatkar</h1>
+      <div class="loader-line"></div>
+    </div>
+  </div>
+
+  <!-- ANIMATED FLARES CONTAINER (behind everything) -->
+  <div class="flare-container">
+    <div class="flare flare-1"></div>
+    <div class="flare flare-2"></div>
+    <div class="flare flare-3"></div>
+    <div class="flare flare-4"></div>
+    <div class="flare flare-5"></div>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <!-- Replace with your own logo if desired -->
+      <img src="icons/Website Logo_GR.png" alt="Logo" class="logo-image" />
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <!-- HOME -->
+        <li>
+          <a href="#home">
+            <img src="icons/home.gif" alt="Home Icon" class="nav-icon" />
+            <span class="nav-text">Home</span>
+          </a>
+        </li>
+        <!-- PROJECTS -->
+        <li>
+          <a href="#projects">
+            <img src="icons/projects.gif" alt="Projects Icon" class="nav-icon" />
+            <span class="nav-text">Projects</span>
+          </a>
+        </li>
+        <!-- ABOUT -->
+        <li>
+          <a href="#about">
+            <img src="icons/aboutme.gif" alt="About Icon" class="nav-icon" />
+            <span class="nav-text">About Me</span>
+          </a>
+        </li>
+        <!-- RESUME -->
+        <li>
+          <a href="#resume">
+            <img src="icons/resume.gif" alt="Resume Icon" class="nav-icon" />
+            <span class="nav-text">Resume</span>
+          </a>
+        </li>
+        <!-- CONTACT -->
+        <li>
+          <a href="#contact">
+            <img src="icons/contact.gif" alt="Contact Icon" class="nav-icon" />
+            <span class="nav-text">Contact</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HOME SECTION -->
+  <section id="home" class="section home-section active">
+    <div class="hero-content fade-in-up">
+      <h2>Welcome!</h2>
+      <h1>I'm <span>Gaurav Rozatkar</span></h1>
+      <p class="subtitle">
+        An adaptable <strong>Project Manager</strong> and 
+        <strong>Financial Consultant</strong> with multiple years of 
+        experience across Europe and India...
+      </p>
+      <img 
+        src="icons/ProfilePhoto.png" 
+        alt="Profile Photo" 
+        class="profile-image" 
+      />
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="section projects-section">
+    <h2>Projects</h2>
+    <p>Here are some of my recent works:</p>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Project One</h3>
+        <p>A short description of your project goes here.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project Two</h3>
+        <p>A short description of your project goes here.</p>
+      </div>
+      <!-- More cards if needed -->
+    </div>
+  </section>
+
+  <!-- ABOUT ME SECTION -->
+  <section id="about" class="section about-section">
+    <h2>About Me</h2>
+    <p>
+      I am a dedicated developer with strong focus on front-end 
+      technologies. My goal is to build visually appealing, 
+      user-friendly web experiences...
+    </p>
+  </section>
+
+  <!-- RESUME SECTION -->
+  <section id="resume" class="section resume-section">
+    <h2>Resume</h2>
+    <p>You can embed or link to your PDF Resume here.</p>
+    <p>
+      For example: 
+      <a href="JohnDoe_Resume.pdf" target="_blank">Download My Resume (PDF)</a>
+    </p>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="section contact-section">
+    <h2>Contact</h2>
+    <p>Email: connect.gauravrozatkar@gmail.com</p>
+    <p>Phone: +49 (157) 50139516</p>
+    <p>Phone: +91 (848) 2800413</p>
+    <div class="social-media">
+      <a href="https://github.com/GauravRozatkar" 
+         target="_blank" 
+         rel="noopener noreferrer">
+        GitHub
+      </a>
+      <a href="https://x.com/GauravRozatkr" 
+         target="_blank" 
+         rel="noopener noreferrer">
+        Twitter
+      </a>
+      <a href="https://www.linkedin.com/in/gaurav-rozatkar123" 
+         target="_blank" 
+         rel="noopener noreferrer">
+        LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-section">
+    <p>© 2025 Gaurav Rozatkar. All rights reserved.</p>
+  </footer>
+
+  <!-- INLINE JS FOR SECTION SWITCHING & PRELOADER -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.nav-links li a');
+      const sections = document.querySelectorAll('.section');
+      const preloader = document.querySelector('.preloader');
+
+      // Hide all sections
+      function hideAllSections() {
+        sections.forEach(section => {
+          section.classList.remove('active');
+        });
+      }
+
+      // Show specific section
+      function showSection(targetId) {
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+      }
+
+      // Navbar links event
+      navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').replace('#', '');
+          hideAllSections();
+          showSection(targetId);
+        });
+      });
+
+      // On window load, fade out preloader
+      window.addEventListener('load', () => {
+        // Wait 2.5s for the loading bar animation
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          // Then remove from DOM after the fade transition
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 700);
+        }, 2500);
+      });
+    });
+  </script>
+</body>
+</html>
